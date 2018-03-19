@@ -1,0 +1,33 @@
+<h1>Meetings in voting process:</h1>
+{% if voting_meetings %}
+    <ul>
+    {% for meeting in voting_meetings %}
+        <li><a href="{% url 'doodleDO:detail' meeting.id %}">ID {{ meeting.id }} | Name: {{ meeting.meeting_name }} | Votes required {{  meeting.meeting_votes_required }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No meetings are available.</p>
+{% endif %}
+
+<h1>Meetings for room selection:</h1>
+{% if room_selection_meetings %}
+    <ul>
+    {% for meeting in room_selection_meetings %}
+        <li><a href="{% url 'doodleDO:detail' meeting.id %}">ID {{ meeting.id }} | Name: {{ meeting.meeting_name }} | Votes required {{  meeting.meeting_votes_required }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No meetings are available.</p>
+{% endif %}
+
+<h1>Meetings settled:</h1>
+
+{% if done_meetings %}
+    <ul>
+    {% for meeting in done_meetings %}
+        <li><a href="{% url 'doodleDO:detail' meeting.id %}">ID {{ meeting.id }} | Name: {{ meeting.meeting_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No meetings are available.</p>
+{% endif %}

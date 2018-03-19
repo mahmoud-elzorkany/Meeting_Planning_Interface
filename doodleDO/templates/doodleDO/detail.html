@@ -1,0 +1,45 @@
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+Meeting name: {{ meeting.meeting_name }}<br>
+Meeting date: {{ meeting.meeting_date }}<br>
+Meeting room: {{ meeting.meeting_room.room_name }}<br>
+
+{% if not meeting.meeting_date %}
+    <h1>Vote a date for {{ meeting.meeting_name }}</h1>
+
+<form action="{% url 'doodleDO:vote' meeting.id %}" method="post">
+{% csrf_token %}
+
+    {% if dates %}
+        <select name="date">
+        {% for date in dates %}
+              <option value="{{ date.id }}">{{ date.date_date }}</option>
+        {% endfor %}
+        </select>
+    {% else %}
+        No dates!
+    {% endif %}
+
+    <input type="submit" value="Vote" />
+</form>
+{% endif %}
+
+
+{% if not meeting.meeting_room and meeting.meeting_date%}
+    <h1>Choose a room for {{ meeting.meeting_name }}</h1>
+
+<form action="{% url 'doodleDO:choose_room' meeting.id %}" method="post">
+{% csrf_token %}
+    {% if rooms %}
+        <select name="room">
+        {% for room in rooms %}
+              <option value="{{ room.id }}">{{ room.room_name }}</option>
+        {% endfor %}
+        </select>
+    {% else %}
+        No rooms!
+    {% endif %}
+<input type="submit" value="Chose room" />
+</form>
+{% endif %}

@@ -1,0 +1,29 @@
+The goal is to create a web application for a meeting planning interface. We will
+consider the following data/processing model:
+
+    - A `meeting` is a data object for which the goal is to have a `room` and a
+      `date`. People are supposed to vote to find the most appropriate date
+    option. Then, a `votesRequired` field will specify how many votes we should have
+    before closing the poll. Once the poll is closed, a room can be chosen for this
+    meeting. A `votes` field and a `date` field may help. The `room` field may be a
+    foreign key. The date field may be initially left null.
+
+    - A `room` is a simple object. It's got a name and a location. It can be
+      used by multiple meetings.
+
+    - A date choice is a possible date for a meeting. It is related to a single
+      meeting. It is composed at least of a Date field.
+
+Once you have described your model and generated the tables in the database,
+you can use a python shell or the admin interface to start filling the database
+(adding meetings and date choices for them).
+
+The public views for this app should allow to:
+
+    1) display the list of meeting and let the user select one of them
+    2) display the details of a meeting
+        - the possible dates if the poll is still open
+        - the possible rooms if the poll is closed
+        - only its details if a room is already assigned for this meeting
+    3) let the user vote for a date for a particular meeting
+    4) let the user assign a room for a particular meeting (once the date is chosen)
